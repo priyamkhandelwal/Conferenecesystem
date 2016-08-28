@@ -1,0 +1,33 @@
+{% load staticfiles %}
+{% load static %}
+<head>
+  <title>{% block title %}{% endblock %}</title>
+<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+  <script type="text/javascript" src = "{% static 'css/materialize/js/materialize.min.js' %}"></script>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize/css/materialize.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+</head>
+
+<div class="navbar-fixed">
+<nav>
+  <div class="nav-wrapper green darken-1">
+    <a href="#!" class="brand-logo" style="padding-left:20px">IGConnect</a>
+    <ul class="right hide-on-med-and-down">
+     
+      <li><a href="/conference/">HOME</a></li>
+      <li><a href="/conference/show">PROFILE</a></li>
+      <li><a href="/login/signout/">LOGOUT</a></li>
+
+    </ul>
+  </div>
+</nav>
+</div>
+
+{% block content %}
+{% endblock %}

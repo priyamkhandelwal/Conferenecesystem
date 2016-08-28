@@ -1,0 +1,53 @@
+<html>
+<head>
+{% load staticfiles %}
+    {% load static %}
+	<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+  	<script type="text/javascript" src = "{% static 'css/materialize/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/f1.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize/css/materialize.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+</head>
+<body>
+{% load static %}
+  <h1>CONFERENCE<br> LOGIN</h1>
+
+<div class = "container">
+	<div class = "row">
+		<div class = "col m6 l6 s12 offset-m3 offset-l3">
+		<form class = "col s12" action = "{% url 'userlogin:signin' %}" method = "post">
+			{% csrf_token %}
+			<div class = "row">
+				
+				<div class = "divider"></div>
+				<div class = "section"></div>
+				<div class="input-field">
+					  <i class="prefix material-icons">perm_identity</i>
+					<input type="text" class="validate" name = "username" required="">
+					<label class = "thin-letters-3" for="first_name">Username</label>
+				</div>
+			</div>
+			<div class = "row">
+				<div class="input-field">
+					<i class="mdi-action-lock-outline prefix"></i>
+					<input type="password" class="validate" name = "password" required="">
+					<label class = "thin-letters-3" for="first_name">password</label>
+				</div>
+			</div>
+			<div class = "row">
+				<div class="input-field s6">
+					<input type="submit" class="validate btn green darken-4 thin-letters-3" value = "Sign in">
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+	</div>
+	</div>
+<a href="{% url 'userlogin:signup' %}">SIGN UP HERE!</a>
+
+</body>
+</html>

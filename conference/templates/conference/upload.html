@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>Conferences</title>
+	{% load staticfiles %}
+    {% load static %}
+	<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+  	<script type="text/javascript" src = "{% static 'css/materialize/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize/css/materialize.min.css' %}" />
+	  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+</head>
+{% load static %}
+<body>
+
+<form class = "col s12" action = "{% url 'conference:upload' %}" method = "post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="row">
+			<div class="col-9">
+			    <div class="customUpload btnUpload btnM">
+			        <span>Upload files</span>
+			        <input type="file" name="paperfile" id="paperfile" class="upload" />
+			    </div>
+			</div>
+			</div>
+			
+			<div class = "row">
+				<div class="input-field s6">
+					<input type="submit" class="validate btn green darken-4 thin-letters-3" value = "UploadFile">
+				</div>
+			</div>
+		</form>
+</body>
+</html>

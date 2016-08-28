@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Conferences</title>
+	{% load staticfiles %}
+    {% load static %}
+	<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+  	<script type="text/javascript" src = "{% static 'css/materialize/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize/css/materialize.min.css' %}" />
+	  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+	  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+	  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+</head>
+{% load static %}
+<body>
+
+{% csrf_token %}
+<!-- <script type="text/javascript" src = "{% static 'js/dashboard/main.js' %}"></script> -->
+<nav>
+          <div class="nav-wrapper green">
+              <a href="#" class="brand-logo center"><font size="7" color="green"> Conference Management</font></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="/conference/">HOME</a></li>
+              <li><a href="/conference/show">PROFILE</a></li>
+              <li><a href="/login/signout/">LOGOUT</a></li>
+            </ul>
+          </div>
+        </nav>
+
+<div class = "section"></div>
+<div class="row thin-letters-3">
+	<div class="col s12 m6 l6 offset-m1 offset-l1 confList">
+		<div class = "row">
+			<div class = "col m4 l4">
+				<span class = "thin-letters-2" style = "font-size:40px">Conferences</span> 
+			</div>
+		</div>
+		<div class = "divider"></div>
+		<div class = "section"></div>
+		<!-- <div class = "progress green" id = "loader" >
+			<div class="determinate green" style="width: 70%"></div>
+		</div> -->
+		<div class = "all">
+		{% for c in conferences %}
+		<div class = "row">
+			<a href="viewconference/?cid={{c.c_id}}" target="_blank">
+				<div class="card green lighten-1 white-text z-depth-2">
+				<div class="card-content">
+					<div class = "row">
+						<span class="card-title">{{c.confname}}</span>
+						<div class = "divider"></div>
+						<div class = "section"></div>
+						<p><b>{{c.manger.first_name}} {{c.manger.last_name}}</b></p>
+						<p class = "desp">{{c.description}}</p>
+					</div>
+					<div class = "row" style = "margin-bottom:0;margin-left:-10px">
+						<div class = "col m6 s6 l6">
+							<p class="white-text ">
+								{% if c.startdate %}
+								starts on : {{c.startdate}}
+								{% endif %}
+								<br/>
+                                {% if c.enddate %}
+								ends on : {{c.enddate}}
+								{% endif %}
+							</p>
+					</div>
+				</div>
+			</div>
+				
+			</div>
+		</div>
+	</a>
+	<script>	
+		$(".desp").text(function(index, currentText) {
+			return currentText.substr(0, 180);
+		});
+	</script>
+
+	{% endfor %}
+	</div>
+
+</div>
+
+<div class = "col m4 l4 s12 offset-l1 offset-m1">
+	<!-- Search bar starts -->
+	<div class = "row">
+		<nav class = "col m10 l10 s10 green lighten-1">
+			<div class="nav-wrapper">
+				<form class = "searchForm" action = "#" method = "post">
+					<div class="input-field">
+						
+						<label for="search"><a class = "submitAnchor"><i class="material-icons" style= "cursor:pointer">search</i></a></label>
+						<input id="search" name="search" class="searchWords" type="search" placeholder = "Search" required style="padding-top:20px">
+						<i class="material-icons">close</i>
+					</div>
+				</form>
+			</div>
+		</nav>
+	</div>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+	
+
+</script>
+
+
+</body>
+</html>

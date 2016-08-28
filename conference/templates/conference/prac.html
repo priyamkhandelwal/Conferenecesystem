@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      {% load staticfiles %}
+    {% load static %}
+  <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script type="text/javascript" src = "{% static 'css/materialize/js/materialize.min.js' %}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize/css/materialize.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+{% load static %}
+    <body>
+      <!--Import jQuery before materialize.js-->
+
+  <nav class="green">
+    <div class="nav-wrapper" style="margin-left: 50px">
+      <a href="#" class="brand-logo">    Conference Management</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/conference/">Home</a></li>
+        <li><a href="/login/signout/">Logout</a></li>
+        <li><a href="#"><i class="material-icons">perm_identity</i></a></li>
+
+      </ul>
+    </div>
+  </nav>
+        
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+       <div class="col s12 m8 offset-m2 l6 offset-l3" style="margin-top: 30px">
+        <div class="card-panel grey lighten-5 z-depth-1">
+          <div class="row valign-wrapper">
+            <div class="col s2">
+              <img src="{% static 'images/sample.png' %}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+              <span class="black-text" >
+               
+            
+
+      <div class="row" style="margin-left: 200px" style="font-size: 30px">
+        <div class="col s12 m6">
+          <div class="card blue-grey darken-1" style="margin-top: 30px" style="margin-bottom: 30px">
+            <div class="card-content white-text" style="background: #7986cb" style="font-size: 50px">
+              <span class="card-title" style="color: white" style="font-style: bold">User Profile :</span><div id="profileinfo" style="color: white" 
+            style="margin-left: 75px" style="margin-top: 50px" style="font-size: 35px">
+First Name   : {{user.first_name}}<br>
+Last Name    : {{user.last_name}}<br>
+Email Id     : {{user.email}}<br>
+Contact      : {{contact}}</script><br><br>
+              <div id="conferencedetails">
+
+              </div>
+              
+            </div>
+            
+          </div>
+        </div>
+      </div>
+              
+            </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+        

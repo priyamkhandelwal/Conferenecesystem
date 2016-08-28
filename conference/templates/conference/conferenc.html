@@ -1,0 +1,157 @@
+<html>
+<head>
+      {% load staticfiles %}
+    {% load static %}
+  <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+    <script type="text/javascript" src = "{% static 'css/materialize/js/materialize.min.js' %}"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/materialize/css/materialize.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" /> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+     {% load static %}
+<body>
+        <nav>
+          <div class="nav-wrapper green">
+              <a href="#" class="brand-logo center"><font size="7" color="green" >Conference Management</font></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+              <li><a href="/conference/">HOME</a></li>
+              <li><a href="/conference/show">PROFILE</a></li>
+              <li><a href="/login/signout/">LOGOUT</a></li>
+              {% for p in pages %}
+                {% if p.ispublished %}
+                <li><a href="/conference/conferencepage/?pn={{p.pagename}}">{{p.pagename}}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </nav>
+        
+         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+         <h2 align="center"><font size="22" color="black">{{conference.confname}}</font></h2>
+         <div class="w3-content w3-section" style="max-width:500px">
+             <div class="row">
+                 <div class="col l4"></div>
+                 <div class="col l8  offset-l4">
+                     <div class="row">
+                         <div class="col l12 s12 m12">
+                           <center><img class="mySlides" src="{% static 'images/11848.jpg' %}" height="300" width="900"></center>
+                          <img class="mySlides" src="{% static 'images/1884176.jpg' %}" align="center" height="300" width="900">
+                          <img class="mySlides" src="{% static 'images/bicycle-1280x720.jpg' %}" align="center" height="300" width="900">
+</div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+         <br>
+         <br>
+<div class="row">
+    <div class="col l4">
+        <div class="row">
+      <div class="col l12 offset-l2">
+          <i class="medium material-icons">insert_chart</i>
+            </div>
+        </div>
+        <div class="col l12">
+        <div class="row">
+        <div class="card small green">
+            
+            
+            <h4 align="center"><font size="6" color="white">Description</font></h4>
+            <br>
+            <center><span class="black-text"> {{conference.description}} </span></center>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col l4">
+        <div class="row">
+          <div class="col l12">
+            <i class="medium material-icons">today</i>
+          </div>
+        </div>
+        <div class="col l12">
+        <div class="row">
+        <div class="card small green">
+            <h4 align="center"><font size="6" color="white">Dates</font></h4>
+            <br>
+         <h5 align="center">    Start Date:  {{conference.startdate}}</h5>     
+         <h5 align="center">    End Date:  {{conference.enddate}}</h5>
+         
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col l4">
+        <div class="row">
+      <div class="col l12">
+          <i class="medium material-icons">contacts</i>
+            </div>
+        </div>
+        <div class="col l12">
+        <div class="row">
+        <div class="card small green">
+            <h4 align="center"><font size="6" color="white">Contacts</font></h4>
+            <p align="center" style="font-size:20px">Conference Manager:</p> 
+            <p align="center" style="font-size:20px">{{conference.manager}}</p>
+            <p align="center" style="font-size:20px">Conference Editor: </p>
+            <p align="center" style="font-size:20px">
+              {% for e in editors %}
+                {{e}} <br>
+              {% endfor %}
+            </p>
+            
+        </div>
+      </div>
+    </div>
+    </div>
+         </div>
+
+      <div class="row green">
+        <div class="col l8 offset-l2">
+        <div class="card small">
+        <h4 align="center"><font size="6" color="green">Published papers : </font></h4>
+          {% for p in papers %}
+            {% if p.aprooved %}
+              <p align="center" style="font-size:20px"> <a href="/{{p.paperfile}}"> {{p.pname}} </a></p>
+            {% endif %}
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+
+         <div class="row">
+             <div class="col l6 offset-l2">
+                 <form method="POST" action="{% url 'conference:upload' %}" enctype="multipart/form-data">
+                 {% csrf_token %}
+                    <label for="papername" class = "thin-letters-3">papername</label> 
+                    <input type="text" name="papername" id="papername">
+                    <strong>Upload paper:</strong>
+                    <input type="file" name="paperfile" id="paperfile" class="upload" />
+                    <input type="submit" value="Upload Doc" name="submit"/>
+                  </form>
+             </div>
+         </div>
+</body>
+</html>
