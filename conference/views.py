@@ -29,15 +29,51 @@ def show(request):
 	return render(request,'conference/prac.html',{'user':user,'contact':contact})
 
 def viewconference(request):
-	cid = request.GET.get('cid')
-	conference = Conference.objects.get(c_id=cid)
-	editors = conference.editors.all()
-	papers = Papers.objects.filter(conference=conference)
-	pages = Page.objects.filter(conference=conference)
-	# print conference.confpapers
-	return render(request,'conference/conferenc.html',{'conference':conference,'editors':editors,'papers':papers,'pages':pages})
+	if not request.user.is_authenticated():
+		flag1 = False
+		flag2 = False
+		cid = request.GET.get('cid')
+		conference = Conference.objects.get(c_id=cid)
+		editors = conference.editors.all()
+		papers = Papers.objects.filter(conference=conference)
+		pages = Page.objects.filter(conference=conference)
+		return render(request,'conference/conferenc.html',{'conference':conference,'editors':editors,'papers':papers,'pages':pages,'flag1':flag1,'flag2':flag2})
+	else:
+		cid = request.GET.get('cid')
+		conference = Conference.objects.get(c_id=cid)
+		editors = conference.editors.all()
+		papers = Papers.objects.filter(conference=conference)
+		pages = Page.objects.filter(conference=conference)
+		user = request.user
+		u = UserProfile.objects.get(user=user)
+		flag1 = False
+		flag2 = False
+		regconf = u.regconf.all()
+		for r in regconf:
+			if r.c_id == int(cid):
+				flag1=True
+		print flag1
+		if request.user.is_authenticated():
+			flag2=True
+		print flag2
+		# print conference.confpapers
+		return render(request,'conference/conferenc.html',{'conference':conference,'editors':editors,'papers':papers,'pages':pages,'flag1':flag1,'flag2':flag2})
 
 def conferencepage(request):
 	pn = request.GET.get('pn')
 	page = Page.objects.get(pagename=pn)
 	return render(request,'conference/dynamicpage.html',{'title':page.pagename,'content':page.content,'template':page.template})
+
+def allconf(request):
+	confs = Conference.objects.all()
+	return render(request,'conference/frontpage.html',{'conferences':confs})
+
+def register(request):
+	cid = request.GET.get('cid')
+	conference = Conference.objects.get(c_id=cid)
+	user = request.user
+	u = UserProfile.objects.get(user=user)
+	u.regconf.add(conference)
+	u.save()
+	confs = Conference.objects.all()
+	return render(request,'conference/mainpage.html',{'conferences':confs})

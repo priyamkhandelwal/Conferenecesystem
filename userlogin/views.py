@@ -8,7 +8,7 @@ from .models import UserProfile
 
 # Create your views here.
 def index(request):
-	return render(request,'userlogin/loginpage.html',None)
+	return render(request,'userlogin/signin.html',None)
 
 def signin(request):
 	if request.method == 'POST':
@@ -16,12 +16,12 @@ def signin(request):
 		password = request.POST['password']
 		user = authenticate(username=username,password=password)
 		if user is None:
-			return render(request,'userlogin/loginpage.html',{'error':'Invalid username or password'})
+			return render(request,'userlogin/signin.html',{'error':'Invalid username or password'})
 		else:
 			login(request,user)
 			return redirect('/conference')#render the dashboard page
 	else:
-		return render(request,'userlogin/loginpage.html',None)
+		return render(request,'userlogin/signin.html',None)
 
 def signup(request):
 	# print "hi there"
@@ -58,4 +58,4 @@ def signup(request):
 
 def signout(request):
 	logout(request)
-	return render(request,'userlogin/loginpage.html',None)
+	return render(request,'userlogin/signin.html',None)

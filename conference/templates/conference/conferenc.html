@@ -18,9 +18,16 @@
           <div class="nav-wrapper green">
               <a href="#" class="brand-logo center"><font size="7" color="green" >Conference Management</font></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {% if flag2 %}
               <li><a href="/conference/">HOME</a></li>
               <li><a href="/conference/show">PROFILE</a></li>
               <li><a href="/login/signout/">LOGOUT</a></li>
+            {% endif %}
+
+            {% if not flag2 %}
+              <li><a href="/conference/allconf/">HOME</a></li>
+              <li><a href="/login/">LOGIN</a></li>
+            {% endif %}
               {% for p in pages %}
                 {% if p.ispublished %}
                 <li><a href="/conference/conferencepage/?pn={{p.pagename}}">{{p.pagename}}</a></li>
@@ -126,8 +133,10 @@ function carousel() {
       </div>
     </div>
     </div>
-         </div>
+  </div>
 
+  {% if flag2 %}
+      {% if flag1 %}
       <div class="row green">
         <div class="col l8 offset-l2">
         <div class="card small">
@@ -153,5 +162,16 @@ function carousel() {
                   </form>
              </div>
          </div>
+         {% endif %}
+
+         {% if not flag1 %}
+                <p align="center" style="font-size:20px"><a class="waves-effect waves-light btn" href="/conference/register/?cid={{conference.c_id}}" style="color:black">Register</a></p>
+         {% endif %}
+
+    {% endif %}
+
+    {% if not flag2 %}
+        <p align="center" style="font-size:20px"><a class="waves-effect waves-light btn" href="/login/" style="color:black">Register</a></p>
+    {% endif %}
 </body>
 </html>
