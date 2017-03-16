@@ -1,2 +1,1 @@
-web: gunicorn confernecesystem.wsgi
-worker: python worker.py
+web: gunicorn coneferencesystem.wsgi --log-file -
